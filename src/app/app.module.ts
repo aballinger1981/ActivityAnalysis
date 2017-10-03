@@ -8,6 +8,8 @@ import { MatMenuModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 
+import { ActivityService } from './activity-service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,7 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
     MatTableModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [ ActivityService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
