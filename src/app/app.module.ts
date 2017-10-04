@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { MatTableModule } from '@angular/material';
@@ -19,7 +20,8 @@ import { ActivityService } from './activity-service';
     BrowserModule,
     BrowserAnimationsModule,
     MatTableModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule
   ],
   providers: [ ActivityService ],
   bootstrap: [AppComponent]
