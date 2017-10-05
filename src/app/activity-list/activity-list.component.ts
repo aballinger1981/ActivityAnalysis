@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivityService } from '../activity-service';
 
 @Component({
   selector: 'app-activity-list',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivityListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public activityService: ActivityService
+  ) { }
 
   ngOnInit() {
   }
