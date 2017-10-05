@@ -12,7 +12,7 @@ import { Activity, ActivityService } from '../activity.service';
 })
 export class ActivityListComponent implements OnInit {
   public activities$: Observable<Activity[]>;
-  private selectedId: number;
+  public selectedId: number;
 
   constructor(
     private activityService: ActivityService,

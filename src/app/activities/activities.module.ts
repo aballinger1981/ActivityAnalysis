@@ -4,6 +4,7 @@ import { ActivityRoutingModule } from './activities-routing.module';
 
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityStoreService } from './activity-store.service';
+import { ActivityService } from './activity.service';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 
 @NgModule({
@@ -15,6 +16,6 @@ import { ActivityDetailComponent } from './activity-detail/activity-detail.compo
     ActivityListComponent,
     ActivityDetailComponent
   ],
-  providers: [ ActivityStoreService ]
+  providers: [ ActivityStoreService, ActivityService ]
 })
 export class ActivitiesModule { }

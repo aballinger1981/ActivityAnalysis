@@ -3,3 +3,12 @@
 
   </md-table>
 </div> -->
+<h2>ACTIVITIES</h2>
+<ul>
+  <li *ngFor="let activity of activities$ | async"
+  [class.selected]="activity.id === selectedId">
+  <a [routerLink]="['/activity', activity.id]">
+    <span>{{activity.id}}</span>{{activity.name}}
+  </a>
+  </li>
+</ul>
