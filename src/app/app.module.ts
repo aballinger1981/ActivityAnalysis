@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { MatTableModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material';
@@ -12,34 +12,20 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
 
 import { ActivityService } from './activity-service';
 import { LoginComponent } from './login/login.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-const appRoutes = [
-  {
-    path: 'activity-list',
-    component: ActivityListComponent
-  },
-  {
-    path: '',
-    redirectTo: '/activity-list',
-    pathMatch: 'full'
-  },
-  {
-    path: '**',
-    component: 'LoginComponent'
-  }
-];
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ActivityListComponent,
-    LoginComponent
+    LoginComponent,
+    PageNotFoundComponent
   ],
   imports: [
-    RouterModule.forRoot(
-      appRoutes
-    ),
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatTableModule,
