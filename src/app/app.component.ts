@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivityService } from './activity-service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +8,8 @@ import { ActivityService } from './activity-service';
 export class AppComponent implements OnInit {
   title = 'Activity Analysis';
 
-  constructor(
-    private activityService: ActivityService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    // this.activityService.getAuthorization();
   }
 }

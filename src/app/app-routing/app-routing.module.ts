@@ -4,16 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from '../login/login.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
-import { ActivityListComponent } from '../activity-list/activity-list.component';
 
 const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },
-  {
-    path: 'activity-list',
-    component: ActivityListComponent
   },
   {
     path: '',
@@ -29,9 +24,7 @@ const appRoutes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(
-      appRoutes
-    ),
+    RouterModule.forRoot(appRoutes),
   ],
   declarations: [],
   exports: [

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 @Injectable()
-export class ActivityService {
+export class ActivityStoreService {
   private oauthUrl: string = 'https://www.strava.com/oauth/authorize?';
   private clientId: number = 20571;
   private responseType: string = 'code';

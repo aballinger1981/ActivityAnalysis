@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivityService } from '../activity-service';
+import { ActivityStoreService } from '../activity-store.service';
 
 @Component({
   selector: 'app-activity-list',
@@ -9,7 +9,7 @@ import { ActivityService } from '../activity-service';
 export class ActivityListComponent implements OnInit {
 
   constructor(
-    public activityService: ActivityService
+    public activityStore: ActivityStoreService
   ) { }
 
   ngOnInit() {

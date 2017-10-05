@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivityStoreService } from '../activities/activity-store.service';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public activityStore: ActivityStoreService
+  ) { }
 
   ngOnInit() {
   }
