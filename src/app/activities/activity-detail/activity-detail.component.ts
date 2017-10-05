@@ -1,16 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
-
+import { slideInDownAnimation } from '../../animations';
 import { Activity, ActivityService } from '../activity.service';
 
 @Component({
   selector: 'app-activity-detail',
   templateUrl: './activity-detail.component.html',
-  styleUrls: ['./activity-detail.component.css']
+  styleUrls: ['./activity-detail.component.css'],
+  animations: [ slideInDownAnimation ]
 })
 export class ActivityDetailComponent implements OnInit {
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display')   display = 'block';
+  @HostBinding('style.position')  position = 'absolute';
+
   public activity$: Observable<Activity>;
 
   constructor(

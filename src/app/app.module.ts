@@ -20,13 +20,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     PageNotFoundComponent
   ],
   imports: [
-    ActivitiesModule,
-    AppRoutingModule,
-    BrowserModule,
     BrowserAnimationsModule,
+    BrowserModule,
     MatTableModule,
     MatMenuModule,
     HttpClientModule,
+    ActivitiesModule,
+    AppRoutingModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]
