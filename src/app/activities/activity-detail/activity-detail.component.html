@@ -1,3 +1,13 @@
-<p>
-  activity-detail works!
-</p>
+<h2>ACTIVITIES</h2>
+<div *ngIf="activity$ | async as activity">
+  <h3>"{{activity.name}}"</h3>
+  <div>
+    <label>Id: </label>{{activity.id}}
+  </div>
+  <div>
+    <label>Name: </label>{{activity.name}}
+  </div>
+  <p>
+    <button (click)="this.goToActivities(activity)">Back</button>
+  </p>
+</div>
