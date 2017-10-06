@@ -6,7 +6,7 @@ export class ActivityStoreService {
   private oauthUrl: string = 'https://www.strava.com/oauth/authorize?';
   private clientId: number = 20571;
   private responseType: string = 'code';
-  private redirectUri: string = 'http://localhost:4200';
+  private redirectUri: string = 'http://localhost:4200/activity-list';
   private scope: string = 'view_private,write';
   private activitiesUrl: string = 'https://www.strava.com/api/v3/activities?';
   private parameters = 'access_token=e966eb31b5f5d41b9b35da95c2af2451801891ef&id=1213479230&include_all_efforts=true';

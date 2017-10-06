@@ -9,7 +9,8 @@ import { MatTableModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-
+import { AuthGuardService } from './auth-guard.service';
+import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -28,7 +29,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ActivitiesModule,
     AppRoutingModule
   ],
-  providers: [ ],
+  providers: [ AuthGuardService, AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
