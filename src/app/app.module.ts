@@ -9,16 +9,16 @@ import { MatTableModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
-import { AuthGuardService } from './auth-guard.service';
-import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { TokenExchangeComponent } from './token-exchange/token-exchange.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TokenExchangeComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -29,7 +29,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ActivitiesModule,
     AppRoutingModule
   ],
-  providers: [ AuthGuardService, AuthService ],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
