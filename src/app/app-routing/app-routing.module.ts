@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from '../login/login.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
-import { TokenExchangeComponent } from '../token-exchange/token-exchange.component';
 import { AuthGuardService } from '../auth-guard.service';
 import { AuthService } from '../auth.service';
 
@@ -15,15 +14,9 @@ const appRoutes: Routes = [
     canActivate: [ AuthGuardService ]
   },
   {
-    path: 'token-exchange',
-    component: TokenExchangeComponent,
-    canActivate: [ AuthGuardService ]
-  },
-  {
     path: '',
     redirectTo: '/login',
-    pathMatch: 'full',
-    canActivate: [AuthGuardService],
+    pathMatch: 'full'
   },
   {
     path: '**',

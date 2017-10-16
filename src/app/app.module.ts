@@ -11,14 +11,12 @@ import { MatMenuModule } from '@angular/material';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { TokenExchangeComponent } from './token-exchange/token-exchange.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     PageNotFoundComponent,
-    TokenExchangeComponent
   ],
   imports: [
     BrowserAnimationsModule,

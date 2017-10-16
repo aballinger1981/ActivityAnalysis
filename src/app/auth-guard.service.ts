@@ -12,17 +12,15 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const url: string = state.url;
-    const accessToken = route.queryParams['code'];
-    return this.checkLogin(url, accessToken);
-  }
-
-  checkLogin(url: string, accessToken: string | undefined): boolean {
-    if (localStorage.getItem('stravaToken') && (url === '/login' || url === '/token-exchange')) {
-      this.router.navigate(['/activity-list']);
+    const code = route.queryParams['code'];
+    if (localStorage.getItem('accessToken') && url === '/login') {
+      this.router.navigate(['activity-list']);
       return false;
-    }
-    if (!localStorage.getItem('stravaToken') && (url !== '/login' && !accessToken)) {
-      this.router.navigate(['/login']);
+    } else if (!localStorage.getItem('accessToken') && code) {
+      this.authService.tokenExchange(code, url);
+      return false;
+    } else if (!localStorage.getItem('accessToken') && url !== '/login') {
+      this.router.navigate(['login']);
       return false;
     }
     return true;

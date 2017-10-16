@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivityStoreService } from '../activities/activity-store.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -10,8 +9,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit {
 
   constructor(
-    public activityStore: ActivityStoreService,
-    public authService: AuthService
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
