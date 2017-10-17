@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ActivityRoutingModule } from './activities-routing.module';
 
 import { ActivityListComponent } from './activity-list/activity-list.component';
-import { ActivityStoreService } from './activity-store.service';
 import { ActivityService } from './activity.service';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 
@@ -16,6 +15,6 @@ import { ActivityDetailComponent } from './activity-detail/activity-detail.compo
     ActivityListComponent,
     ActivityDetailComponent
   ],
-  providers: [ ActivityStoreService, ActivityService ]
+  providers: [ ActivityService ]
 })
 export class ActivitiesModule { }

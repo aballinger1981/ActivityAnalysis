@@ -4,9 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ActivitiesModule } from './activities/activities.module';
-
-import { MatTableModule } from '@angular/material';
-import { MatMenuModule } from '@angular/material';
+import { MaterialModule } from './material.module';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -21,11 +19,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
-    MatTableModule,
-    MatMenuModule,
     HttpClientModule,
     ActivitiesModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MaterialModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]

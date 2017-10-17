@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
-
+import { DatePipe } from '@angular/common';
 import { Activity, ActivityService } from '../activity.service';
+import { DataSource } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-activity-list',
@@ -13,6 +14,7 @@ import { Activity, ActivityService } from '../activity.service';
 export class ActivityListComponent implements OnInit {
   public activities$: Observable<any>;
   public selectedId: number;
+  public displayedColumns = ['start_date', 'name'];
 
   constructor(
     private activityService: ActivityService,

@@ -8,7 +8,13 @@
   <li *ngFor="let activity of activities$ | async"
   [class.selected]="activity.id === selectedId">
   <a [routerLink]="['/activity', activity.id]">
-    <span>{{activity.id}}</span>{{activity.name}}
+    <span>{{activity.start_date | date:'medium'}}</span>{{activity.name}}
   </a>
   </li>
 </ul>
+
+<div>
+  <mat-card>
+
+  </mat-card>
+</div>
