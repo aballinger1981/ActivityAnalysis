@@ -16,7 +16,7 @@ export class ActivityDetailComponent implements OnInit {
   @HostBinding('style.display')   display = 'block';
   @HostBinding('style.position')  position = 'absolute';
 
-  public activity$: Observable<Activity>;
+  public activity$: Observable<any>;
 
   constructor(
     private route: ActivatedRoute,

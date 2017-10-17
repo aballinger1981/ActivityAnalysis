@@ -29,14 +29,14 @@ export class AuthService {
       `&redirect_uri=${this.redirectUri}&scope=${this.scope}`;
   }
 
-  public tokenExchange(code: string, url: string) {
+  public tokenExchange(code: string, url: string): void {
     const tokenUrl: string = 'https://www.strava.com/oauth/token';
     const body: PostBody = {
       client_id: this.clientId,
       client_secret: '58f848c0c2048a249eeab6eb0ecbe7a97172c768',
       code: code
     };
-    return this.http.post(tokenUrl, body).subscribe(data => {
+    const request = this.http.post(tokenUrl, body).subscribe(data => {
       const accessToken = data['access_token'];
       localStorage.setItem('accessToken', accessToken);
       if (url.substring(0, 14) === '/activity-list') {
@@ -47,7 +47,7 @@ export class AuthService {
     },
       (error: HttpErrorResponse) => {
         console.error(error.error);
-    });
+      });
   }
 
 }

@@ -11,7 +11,7 @@ import { Activity, ActivityService } from '../activity.service';
   styleUrls: ['./activity-list.component.css']
 })
 export class ActivityListComponent implements OnInit {
-  public activities$: Observable<Activity[]>;
+  public activities$: Observable<any>;
   public selectedId: number;
 
   constructor(
