@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
+
+interface ActivityListData {
+  startDate: string;
+  name: string;
+}
 
 export class Activity {
   constructor(
@@ -23,8 +28,10 @@ export class ActivityService {
     if (this.activityList) { return Observable.of(this.activityList); }
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    const response = this.http.get(this.activitiesUrl, { headers });
-    response.subscribe(data => this.activityList = data);
+    const response = this.http.get(`${this.activitiesUrl}?per_page=50`, { headers });
+    response.subscribe(data => {
+      this.activityList = data;
+    });
     return response;
   }
 

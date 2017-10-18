@@ -6,6 +6,11 @@ import { DatePipe } from '@angular/common';
 import { Activity, ActivityService } from '../activity.service';
 import { DataSource } from '@angular/cdk/collections';
 
+interface ActivityData {
+  start_date: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-activity-list',
   templateUrl: './activity-list.component.html',
@@ -14,12 +19,15 @@ import { DataSource } from '@angular/cdk/collections';
 export class ActivityListComponent implements OnInit {
   public activities$: Observable<any>;
   public selectedId: number;
-  public displayedColumns = ['start_date', 'name'];
+  public displayedColumns = ['start_date', 'type'];
+  public dataSource: ExampleDataSource | null;
 
   constructor(
     private activityService: ActivityService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.dataSource = new ExampleDataSource(activityService);
+   }
 
   ngOnInit() {
     this.activities$ = this.route.paramMap
@@ -28,5 +36,16 @@ export class ActivityListComponent implements OnInit {
         return this.activityService.getActivities();
       });
   }
+}
 
+export class ExampleDataSource extends DataSource<any> {
+  constructor(
+    private activityService: ActivityService
+  ) { super(); }
+
+  connect(): Observable<any> {
+    return this.activityService.getActivities();
+  }
+
+  disconnect() { }
 }

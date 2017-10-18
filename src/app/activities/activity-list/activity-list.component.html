@@ -4,17 +4,34 @@
   </md-table>
 </div> -->
 <h2>ACTIVITIES</h2>
-<ul>
+<!-- <ul>
   <li *ngFor="let activity of activities$ | async"
   [class.selected]="activity.id === selectedId">
   <a [routerLink]="['/activity', activity.id]">
     <span>{{activity.start_date | date:'medium'}}</span>{{activity.name}}
   </a>
   </li>
-</ul>
+</ul> -->
 
-<div>
-  <mat-card>
+<div class="activities-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="start_date">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let activity">
+        <a [routerLink]="['/activity', activity.id]">
+        {{activity.start_date | date:'medium'}} </a></mat-cell>
+    </ng-container>
 
-  </mat-card>
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let activity"> {{activity.type}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+    [length]="">
+  </mat-paginator>
 </div>

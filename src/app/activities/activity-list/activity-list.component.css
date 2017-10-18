@@ -2,3 +2,10 @@ li.selected {
   background-color: #ACCBD8;
   color: #320DB9;
 }
+
+.activities-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
