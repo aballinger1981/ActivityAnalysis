@@ -18,20 +18,18 @@ export class Activity {
 @Injectable()
 export class ActivityService {
   private activitiesUrl: string = 'https://www.strava.com/api/v3/activities';
-  public activityList: Object;
+  public activityList: Observable<any>;
 
   constructor(
     private http: HttpClient
   ) { }
 
   public getActivities(): Observable<any> {
-    if (this.activityList) { return Observable.of(this.activityList); }
+    if (this.activityList) { return this.activityList; }
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    const response = this.http.get(`${this.activitiesUrl}?per_page=50`, { headers });
-    response.subscribe(data => {
-      this.activityList = data;
-    });
+    const response = this.http.get(`${this.activitiesUrl}?per_page=10`, { headers });
+    this.activityList = response;
     return response;
   }
 
