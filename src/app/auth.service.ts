@@ -12,12 +12,7 @@ interface PostBody {
 @Injectable()
 export class AuthService {
   public redirectUrl: string;
-
-  private oauthUrl: string = 'https://www.strava.com/oauth/authorize?';
   private clientId: number = 20571;
-  private responseType: string = 'code';
-  public redirectUri: string = 'http://localhost:4200/activity-list';
-  private scope: string = 'view_private,write';
 
   constructor(
     private http: HttpClient,
@@ -25,8 +20,11 @@ export class AuthService {
   ) { }
 
   public login(): void {
-    window.location.href = `${this.oauthUrl}client_id=${this.clientId}&response_type=code` +
-      `&redirect_uri=${this.redirectUri}&scope=${this.scope}`;
+    const redirectUri: string = 'http://localhost:4200/activity-list';
+    const url: string = 'https://www.strava.com/oauth/authorize?';
+    const scope: string = 'view_private,write';
+    window.location.href = `${url}client_id=${this.clientId}&response_type=code` +
+      `&redirect_uri=${redirectUri}&scope=${scope}`;
   }
 
   public tokenExchange(code: string, url: string): void {
