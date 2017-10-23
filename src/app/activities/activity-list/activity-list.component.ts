@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable';
 import { DatePipe } from '@angular/common';
 import { Activity, ActivityService } from '../activity.service';
