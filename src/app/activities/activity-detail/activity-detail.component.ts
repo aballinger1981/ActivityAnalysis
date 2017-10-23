@@ -8,7 +8,7 @@ import { Activity, ActivityService } from '../activity.service';
 @Component({
   selector: 'app-activity-detail',
   templateUrl: './activity-detail.component.html',
-  styleUrls: ['./activity-detail.component.css'],
+  styleUrls: ['./activity-detail.component.scss'],
   animations: [ slideInDownAnimation ]
 })
 export class ActivityDetailComponent implements OnInit {

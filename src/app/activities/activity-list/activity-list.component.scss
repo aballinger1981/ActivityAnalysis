@@ -1,3 +1,12 @@
+h2 {
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 li.selected {
   background-color: #ACCBD8;
   color: #320DB9;
@@ -6,7 +15,7 @@ li.selected {
 .activities-container {
   display: flex;
   flex-direction: column;
-  min-width: 300px;
+  min-width: 600px;
 }
 
 .mat-table {

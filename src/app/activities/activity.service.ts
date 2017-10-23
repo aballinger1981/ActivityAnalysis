@@ -38,11 +38,8 @@ export class ActivityService {
     const headers: HttpHeaders = new HttpHeaders()
     .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(url, { headers });
-    response.subscribe(data => console.log(data));
+    // response.subscribe(data => console.log(data));
     return response;
-    // return this.getActivities()
-    // // (+) before `id` turns the string into a number
-    //   .map(activities => activities.find(activity => activity.id === +id));
   }
 
 }
