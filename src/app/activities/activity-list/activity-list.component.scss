@@ -15,10 +15,14 @@ li.selected {
 .activities-container {
   display: flex;
   flex-direction: column;
-  min-width: 600px;
+  min-width: 1000px;
 }
 
 .mat-table {
   overflow: auto;
-  max-height: 500px;
+  max-height: 1000px;
+}
+
+a {
+  text-decoration: none;
 }

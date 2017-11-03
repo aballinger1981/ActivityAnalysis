@@ -19,7 +19,7 @@
         <mat-header-cell *matHeaderCellDef> Date / Time </mat-header-cell>
         <mat-cell *matCellDef="let activity">
           <a [routerLink]="['/activity', activity.id]">
-          {{activity.start_date | date:'medium'}} </a></mat-cell>
+          {{activity.start_date | date:'EEE M/d/yy, h:mm a'}} </a></mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="distance">
