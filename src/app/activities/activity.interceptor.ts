@@ -5,19 +5,23 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
 @Injectable()
-export class NoopInterceptor implements HttpInterceptor {
+export class ActivityInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).do(event => {
       if (event instanceof HttpResponse && event.body.length) {
         const duplicate = event.clone({
           body: event.body.map(activity => {
-            return activity['average_pace'] = this.calculateAveragePace(activity);
+            activity['average_pace'] = this.calculateAveragePace(activity);
+            activity['distance'] = this.calculateMiles(activity);
+            return activity;
           })
         });
       } else if (event instanceof HttpResponse) {
         const activity = event.body;
+        activity['average_pace'] = this.calculateAveragePace(activity);
+        activity['distance'] = this.calculateMiles(activity);
         const duplicate = event.clone({
-          body: activity['average_pace'] = this.calculateAveragePace(activity)
+          body: activity
         });
       }
     });
@@ -31,5 +35,10 @@ export class NoopInterceptor implements HttpInterceptor {
     if (seconds.length === 1) { seconds = '' + seconds + '0'; }
     averagePace = `${averagePace.substring(0, 1)}:${seconds}`;
     return averagePace;
+  }
+
+  private calculateMiles(activity): number {
+    const miles: number = +(activity['distance'] / 1609.344).toFixed(2);
+    return miles;
   }
 }

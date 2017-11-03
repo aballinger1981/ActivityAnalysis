@@ -21,7 +21,7 @@ export class ActivityListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public selectedId: number;
-  public displayedColumns = ['start_date', 'average_pace', 'type'];
+  public displayedColumns = ['start_date', 'distance', 'average_pace', 'type'];
   public dataSource: ExampleDataSource | null;
 
   constructor(

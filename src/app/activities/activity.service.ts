@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 interface ActivityListData {
@@ -16,18 +18,20 @@ export class Activity {
 @Injectable()
 export class ActivityService {
   private activitiesUrl: string = 'https://www.strava.com/api/v3/activities';
-  public activityList: Observable<any>;
+  public activityList: Object;
+  public dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  get data(): any[] { return this.dataChange.value; }
 
   constructor(
     private http: HttpClient
   ) { }
 
   public getActivities(): Observable<any> {
-    if (this.activityList) { return this.activityList; }
+    if (this.activityList) { return Observable.of(this.activityList); }
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(`${this.activitiesUrl}?per_page=10`, { headers });
-    this.activityList = response;
+    response.subscribe(data => this.activityList = data);
     return response;
   }
 

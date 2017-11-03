@@ -22,9 +22,14 @@
           {{activity.start_date | date:'medium'}} </a></mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="distance">
+        <mat-header-cell *matHeaderCellDef> Distance </mat-header-cell>
+        <mat-cell *matCellDef="let activity"> {{activity.distance}}mi </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="average_pace">
         <mat-header-cell *matHeaderCellDef> Average Pace </mat-header-cell>
-        <mat-cell *matCellDef="let activity"> {{activity.average_pace}} </mat-cell>
+        <mat-cell *matCellDef="let activity"> {{activity.average_pace}}/mi </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="type">

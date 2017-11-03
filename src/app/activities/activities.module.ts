@@ -7,7 +7,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityService } from './activity.service';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
-import { NoopInterceptor } from './noop.interceptor';
+import { ActivityInterceptor } from './activity.interceptor';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { NoopInterceptor } from './noop.interceptor';
   ],
   providers: [ActivityService, {
     provide: HTTP_INTERCEPTORS,
-    useClass: NoopInterceptor,
+    useClass: ActivityInterceptor,
     multi: true,
   } ]
 })
