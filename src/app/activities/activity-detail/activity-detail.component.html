@@ -12,6 +12,14 @@
   <div>
     <label>Average Pace: </label>{{activity.average_pace}}
   </div>
+  <div>
+    <label>Splits: </label>
+    <ul>
+      <li *ngFor="let split of activity.splits_standard">
+        <em>Split {{split.split}}:</em> {{split.pace}}/mi
+      </li>
+    </ul>
+  </div>
   <p>
     <button (click)="this.goToActivities(activity)">Back</button>
   </p>
