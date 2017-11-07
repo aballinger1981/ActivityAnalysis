@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from '@angular/common/http';
 
 interface ActivityListData {
@@ -30,7 +30,7 @@ export class ActivityService {
     if (this.activityList) { return Observable.of(this.activityList); }
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    const response = this.http.get(`${this.activitiesUrl}?per_page=10`, { headers });
+    const response = this.http.get(`${this.activitiesUrl}?page=1`, { headers });
     response.subscribe(data => this.activityList = data);
     return response;
   }
