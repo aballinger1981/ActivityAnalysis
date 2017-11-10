@@ -31,11 +31,13 @@ export class ActivityInterceptor implements HttpInterceptor {
   }
 
   private calculateAveragePace(movingTime, distance): string {
-    movingTime = movingTime / 60;
+    movingTime = (movingTime / 60).toFixed(2);
     distance = +(distance / 1609.344).toFixed(2);
-    let averagePace: string = (movingTime / distance).toFixed(2).toString();
+    let averagePace: string = (movingTime / distance).toFixed(2);
     let seconds: string = Math.round(+(averagePace.substring(averagePace.length - 3)) * 60).toString();
-    if (seconds.length === 1) { seconds = '' + seconds + '0'; }
+    if (Number.parseInt(seconds, 10) < 10) {
+      seconds = '0' + seconds;
+    } else if (seconds.length === 1) { seconds = '' + seconds + '0'; }
     averagePace = `${averagePace.substring(0, 1)}:${seconds}`;
     return averagePace;
   }
