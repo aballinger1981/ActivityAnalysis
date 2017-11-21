@@ -40,7 +40,7 @@ export class ActivityService {
     const headers: HttpHeaders = new HttpHeaders()
     .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(url, { headers });
-    response.subscribe(data => console.log(data, 'bob'));
+    response.subscribe(data => console.log(data));
     return response;
   }
 

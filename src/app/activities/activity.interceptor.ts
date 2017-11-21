@@ -16,7 +16,7 @@ export class ActivityInterceptor implements HttpInterceptor {
             return activity;
           })
         });
-      } else if (event instanceof HttpResponse) {
+      } else if (event instanceof HttpResponse && !event.body['access_token']) {
         const activity = event.body;
         activity['average_pace'] = this.calculateAveragePace(activity['moving_time'], activity['distance']);
         activity['distance'] = this.calculateMiles(activity);
