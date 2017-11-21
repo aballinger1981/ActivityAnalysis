@@ -45,6 +45,7 @@ export class ExampleDataSource extends DataSource<any> {
   ) { super(); }
 
   connect(): Observable<any> {
+    this.activityService.getHeaderInformation();
     return this.activityService.getActivities();
   }
 

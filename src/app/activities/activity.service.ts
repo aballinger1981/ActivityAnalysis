@@ -26,6 +26,13 @@ export class ActivityService {
     private http: HttpClient
   ) { }
 
+  public getHeaderInformation(): void {
+    const headers: HttpHeaders = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
+    const response = this.http.head(this.activitiesUrl, { headers });
+    response.subscribe(data => console.log(data));
+  }
+
   public getActivities(): Observable<any> {
     if (this.activityList) { return Observable.of(this.activityList); }
     const headers: HttpHeaders = new HttpHeaders()
