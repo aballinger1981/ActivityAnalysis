@@ -19,6 +19,8 @@ export class Activity {
 export class ActivityService {
   private activitiesUrl: string = 'https://www.strava.com/api/v3/activities';
   public activityList: Object;
+  public athleteId: number;
+  public activityTotal: number;
   public dataChange: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   get data(): any[] { return this.dataChange.value; }
 
@@ -26,11 +28,28 @@ export class ActivityService {
     private http: HttpClient
   ) { }
 
-  public getHeaderInformation(): void {
+  public getAthlete(): void {
+    const url: string = 'https://www.strava.com/api/v3/athlete';
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    const response = this.http.head(this.activitiesUrl, { headers });
-    response.subscribe(data => console.log(data));
+    const response = this.http.get(url, { headers });
+    response.subscribe(data => {
+      this.athleteId = data['id'];
+      console.log(this.athleteId, data);
+      this.getActivityTotal();
+    });
+  }
+
+  public getActivityTotal(): void {
+    const url: string = `https://www.strava.com/api/v3/athletes/${this.athleteId}/stats`;
+    const headers: HttpHeaders = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
+    const response = this.http.get(url, { headers });
+    response.subscribe(data => {
+      this.activityTotal = data['all_ride_totals']['count'] + data['all_run_totals']['count'] +
+        data['all_swim_totals']['count'];
+      console.log(this.activityTotal);
+    });
   }
 
   public getActivities(): Observable<any> {
@@ -38,7 +57,9 @@ export class ActivityService {
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(`${this.activitiesUrl}?page=1`, { headers });
-    response.subscribe(data => this.activityList = data);
+    response.subscribe(data => {
+      this.activityList = data;
+    });
     return response;
   }
 

@@ -8,7 +8,9 @@ import 'rxjs/add/operator/do';
 export class ActivityInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).do(event => {
-      if (event instanceof HttpResponse && event.body.length) {
+      if (event instanceof HttpResponse && event.body.length
+        && event.url !== 'https://www.strava.com/api/v3/athlete') {
+        console.log(event);
         const duplicate = event.clone({
           body: event.body.map(activity => {
             activity['average_pace'] = this.calculateAveragePace(activity['moving_time'], activity['distance']);
@@ -16,7 +18,9 @@ export class ActivityInterceptor implements HttpInterceptor {
             return activity;
           })
         });
-      } else if (event instanceof HttpResponse && !event.body['access_token']) {
+      } else if (event instanceof HttpResponse && !event.body['access_token']
+      && !event.body['all_run_totals']
+      && event.url !== 'https://www.strava.com/api/v3/athlete') {
         const activity = event.body;
         activity['average_pace'] = this.calculateAveragePace(activity['moving_time'], activity['distance']);
         activity['distance'] = this.calculateMiles(activity);
