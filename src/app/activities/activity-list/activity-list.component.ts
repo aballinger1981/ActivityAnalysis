@@ -22,30 +22,35 @@ export class ActivityListComponent implements OnInit {
 
   public selectedId: number;
   public displayedColumns = ['start_date', 'distance', 'average_pace', 'type'];
-  public dataSource: ExampleDataSource | null;
+  public dataSource: ActivityDataSource | null;
 
   constructor(
     private activityService: ActivityService,
     private route: ActivatedRoute
   ) {
-    this.dataSource = new ExampleDataSource(activityService, this.paginator);
+    // this.dataSource = new ActivityDataSource(activityService, this.paginator);
    }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.selectedId = +params.get('id');
     });
+    this.activityService.getAthlete()
+      .subscribe(() => this.activityService.getActivityTotal()
+        .subscribe(() => this.activityService.getActivities()
+        .subscribe((data) => this.dataSource = new ActivityDataSource(this.activityService, this.paginator))));
   }
 }
 
-export class ExampleDataSource extends DataSource<any> {
+export class ActivityDataSource extends DataSource<any> {
   constructor(
     private activityService: ActivityService,
     private paginator: MatPaginator
   ) { super(); }
 
   connect(): Observable<any> {
-    return this.activityService.getActivities();
+    return this.activityService.dataChange;
+    // return Observable.of(this.activityData);
   }
 
   disconnect() { }
