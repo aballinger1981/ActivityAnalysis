@@ -12,7 +12,7 @@ interface PostBody {
 @Injectable()
 export class AuthService {
   public redirectUrl: string;
-  private clientId: number = 20571;
+  public clientId: number = 20571;
 
   constructor(
     private http: HttpClient,
