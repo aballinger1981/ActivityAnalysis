@@ -50,7 +50,6 @@ export class ActivityDataSource extends DataSource<any> {
 
   connect(): Observable<any> {
     return this.activityService.dataChange;
-    // return Observable.of(this.activityData);
   }
 
   disconnect() { }

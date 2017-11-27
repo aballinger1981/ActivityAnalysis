@@ -19,14 +19,12 @@ export class Activity {
 @Injectable()
 export class ActivityService {
   private activitiesUrl: string = 'https://www.strava.com/api/v3/activities';
-  public activityList: Object;
   public athleteId: number;
   public activityTotal: number;
   public pageEvent: PageEvent;
   public pageIndex: number;
   public pageSize: number;
   public dataChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-  get data(): any[] { return this.dataChange.value; }
 
   constructor(
     private http: HttpClient
@@ -57,10 +55,8 @@ export class ActivityService {
   }
 
   public getActivities(event?: PageEvent): Observable<any> {
-    console.log(event);
     let index: number;
     !event ? index = 1 : index = event.pageIndex + 1;
-    // if (this.activityList) { return Observable.of(this.activityList); }
     !event ? this.pageSize = 10 : this.pageSize = event.pageSize;
     !event ? this.pageIndex = 0 : this.pageIndex = event.pageIndex;
     const url: string = 'https://www.strava.com/api/v3/athlete/activities';
@@ -68,9 +64,8 @@ export class ActivityService {
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(`${url}?page=${index}&per_page=${this.pageSize}`, { headers });
     response.subscribe(data => {
-      this.activityList = data;
+      this.dataChange.next(data);
     });
-    this.dataChange.next(response);
     return response;
   }
 
