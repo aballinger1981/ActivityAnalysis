@@ -31,7 +31,7 @@ export class ActivityService {
   ) { }
 
   public getAthlete(): Observable<any> {
-    if (this.athleteId) { return; }
+    if (this.athleteId) { return Observable.of(this.athleteId); }
     const url: string = 'https://www.strava.com/api/v3/athlete';
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
