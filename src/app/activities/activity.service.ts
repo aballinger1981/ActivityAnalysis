@@ -62,6 +62,9 @@ export class ActivityService {
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(`${url}?page=${index}&per_page=${this.pageSize}`, { headers });
+    response.subscribe((activities) => {
+      this.dataChange.next(activities);
+    });
     return response;
   }
 

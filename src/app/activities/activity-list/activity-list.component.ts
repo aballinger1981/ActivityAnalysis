@@ -28,7 +28,7 @@ export class ActivityListComponent implements OnInit {
     private activityService: ActivityService,
     private route: ActivatedRoute
   ) {
-    // this.dataSource = new ActivityDataSource(activityService, this.paginator);
+    this.dataSource = new ActivityDataSource(activityService, this.paginator);
    }
 
   ngOnInit() {
@@ -36,11 +36,7 @@ export class ActivityListComponent implements OnInit {
       this.selectedId = +params.get('id');
     });
     this.activityService.getAthlete();
-    this.activityService.getActivities()
-      .subscribe((activities) => {
-        this.activityService.dataChange.next(activities);
-        this.dataSource = new ActivityDataSource(this.activityService, this.paginator);
-      });
+    this.activityService.getActivities();
   }
 }
 
