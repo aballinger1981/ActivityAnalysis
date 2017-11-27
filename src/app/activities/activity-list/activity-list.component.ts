@@ -35,10 +35,12 @@ export class ActivityListComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.selectedId = +params.get('id');
     });
-    this.activityService.getAthlete()
-      .subscribe(() => this.activityService.getActivityTotal()
-        .subscribe(() => this.activityService.getActivities()
-        .subscribe((data) => this.dataSource = new ActivityDataSource(this.activityService, this.paginator))));
+    this.activityService.getAthlete();
+    this.activityService.getActivities()
+      .subscribe((activities) => {
+        this.activityService.dataChange.next(activities);
+        this.dataSource = new ActivityDataSource(this.activityService, this.paginator);
+      });
   }
 }
 

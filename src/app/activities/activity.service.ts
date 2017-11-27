@@ -30,28 +30,27 @@ export class ActivityService {
     private http: HttpClient
   ) { }
 
-  public getAthlete(): Observable<any> {
-    if (this.athleteId) { return Observable.of(this.athleteId); }
+  public getAthlete(): void {
+    if (this.athleteId) { this.getActivityTotal(); }
     const url: string = 'https://www.strava.com/api/v3/athlete';
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(url, { headers });
     response.subscribe(data => {
       this.athleteId = data['id'];
+      this.getActivityTotal();
     });
-    return response;
   }
 
-  public getActivityTotal(): Observable<any> {
+  public getActivityTotal(): void {
+    if (this.activityTotal) { return; }
     const url: string = `https://www.strava.com/api/v3/athletes/${this.athleteId}/stats`;
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(url, { headers });
     response.subscribe(data => {
-      this.activityTotal = data['all_ride_totals']['count'] + data['all_run_totals']['count'] +
-        data['all_swim_totals']['count'];
+      this.calculateActivityTotal(data);
     });
-    return response;
   }
 
   public getActivities(event?: PageEvent): Observable<any> {
@@ -63,9 +62,6 @@ export class ActivityService {
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(`${url}?page=${index}&per_page=${this.pageSize}`, { headers });
-    response.subscribe(data => {
-      this.dataChange.next(data);
-    });
     return response;
   }
 
@@ -74,8 +70,12 @@ export class ActivityService {
     const headers: HttpHeaders = new HttpHeaders()
     .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(url, { headers });
-    response.subscribe(data => console.log(data));
     return response;
+  }
+
+  public calculateActivityTotal(data): void {
+    this.activityTotal = data['all_ride_totals']['count'] + data['all_run_totals']['count'] +
+    data['all_swim_totals']['count'];
   }
 
 }
