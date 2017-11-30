@@ -3,7 +3,6 @@
 
   </md-table>
 </div> -->
-<h2>ACTIVITIES</h2>
 <!-- <ul>
   <li *ngFor="let activity of activities$ | async"
   [class.selected]="activity.id === selectedId">
@@ -38,7 +37,10 @@
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+        [ngClass]="{'highlight': selectedRowIndex === row.id}"
+        (click)="highlightRow(row)">
+      </mat-row>
     </mat-table>
 
     <mat-paginator #paginator
