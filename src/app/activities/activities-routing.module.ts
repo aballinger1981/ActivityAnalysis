@@ -12,7 +12,7 @@ const activitiesRoutes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
-    path: 'activity/:id',
+    path: 'activity/:id/:page/:per_page',
     component: ActivityDetailComponent,
     canActivate: [AuthGuardService]
   }

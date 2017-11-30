@@ -34,6 +34,8 @@ export class ActivityListComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.selectedId = +params.get('id');
+      this.activityService.pageIndex = +params.get('page');
+      this.activityService.pageSize = +params.get('per_page');
     });
     this.activityService.getAthlete();
     this.activityService.getActivities();

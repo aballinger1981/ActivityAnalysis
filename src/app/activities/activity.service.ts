@@ -55,9 +55,19 @@ export class ActivityService {
 
   public getActivities(event?: PageEvent): Observable<any> {
     let index: number;
-    !event ? index = 1 : index = event.pageIndex + 1;
-    !event ? this.pageSize = 10 : this.pageSize = event.pageSize;
-    !event ? this.pageIndex = 0 : this.pageIndex = event.pageIndex;
+    if (!event && !this.pageIndex) {
+      index = 1;
+    } else if (!event && this.pageIndex) {
+      index = this.pageIndex + 1;
+    } else if (event && (!this.pageIndex || this.pageIndex)) {
+      this.pageIndex = event.pageIndex;
+      index = event.pageIndex + 1;
+    }
+    if (!event && !this.pageSize) {
+      this.pageSize = 10;
+    } else if (event) {
+      this.pageSize = event.pageSize;
+    }
     const url: string = 'https://www.strava.com/api/v3/athlete/activities';
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));

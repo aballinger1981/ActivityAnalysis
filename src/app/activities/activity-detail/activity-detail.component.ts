@@ -17,6 +17,8 @@ export class ActivityDetailComponent implements OnInit {
   @HostBinding('style.position')  position = 'absolute';
 
   public activity$: Observable<any>;
+  public pageIndex: number;
+  public pageSize: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,15 +28,18 @@ export class ActivityDetailComponent implements OnInit {
 
   ngOnInit() {
     this.activity$ = this.route.paramMap
-      .switchMap((params: ParamMap) =>
-        this.activityService.getActivity(params.get('id')));
+      .switchMap((params: ParamMap) => {
+        this.pageIndex = +params.get('page');
+        this.pageSize = +params.get('per_page');
+        return this.activityService.getActivity(params.get('id'));
+      });
   }
 
   public goToActivities(activity: Activity): void {
     const activityId = activity ? activity.id : null;
     // Pass along the activity id if available
     // So that the ActivityList component can select that activity.
-    this.router.navigate(['/activity-list', { id: activityId }]);
+    this.router.navigate(['/activity-list', { id: activityId, page: this.pageIndex, per_page: this.pageSize }]);
   }
 
 }
