@@ -13,26 +13,29 @@
 </ul> -->
 <div class="wrapper">
   <div class="activities-container mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSource">
+      <mat-form-field floatPlaceholder="never">
+          <input matInput #filter placeholder="Filter users">
+      </mat-form-field>
+    <mat-table #table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="start_date">
-        <mat-header-cell *matHeaderCellDef> Date / Time </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Date / Time </mat-header-cell>
         <mat-cell *matCellDef="let activity">
           <a [routerLink]="['/activity', activity.id, activityService.pageIndex, activityService.pageSize]">
           {{activity.start_date | date:'EEE M/d/yy, h:mm a'}} </a></mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="distance">
-        <mat-header-cell *matHeaderCellDef> Distance </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Distance </mat-header-cell>
         <mat-cell *matCellDef="let activity"> {{activity.distance}}mi </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="average_pace">
-        <mat-header-cell *matHeaderCellDef> Average Pace </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Average Pace </mat-header-cell>
         <mat-cell *matCellDef="let activity"> {{activity.average_pace}}/mi </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="type">
-        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Type </mat-header-cell>
         <mat-cell *matCellDef="let activity"> {{activity.type}} </mat-cell>
       </ng-container>
 

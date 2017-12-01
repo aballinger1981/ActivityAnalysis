@@ -25,6 +25,7 @@ export class ActivityService {
   public pageIndex: number;
   public pageSize: number;
   public dataChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  get data(): any[] { return this.dataChange.value; }
 
   constructor(
     private http: HttpClient
