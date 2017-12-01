@@ -94,7 +94,7 @@ export class ActivityDataSource extends DataSource<any> {
     return Observable.merge(...displayDataChanges).map(() => {
       this.filteredData = this.activityService.data.slice().filter((item: any) => {
         const searchString = (item.type).toLowerCase();
-        return searchString.indexOf(this.filter.toLowerCase()) !== -1;
+        return searchString.indexOf(this.filter.toLowerCase().trim()) !== -1;
       });
       const sortedData = this.sortData(this.filteredData.slice());
       this.renderedData = sortedData.splice(0, this.paginator.pageSize);
