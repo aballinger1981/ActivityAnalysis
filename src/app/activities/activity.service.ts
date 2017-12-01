@@ -20,6 +20,7 @@ export class Activity {
 export class ActivityService {
   private activitiesUrl: string = 'https://www.strava.com/api/v3/activities';
   public athleteId: number;
+  public athleteData: Object;
   public activityTotal: number;
   public pageEvent: PageEvent;
   public pageIndex: number;
@@ -32,25 +33,26 @@ export class ActivityService {
   ) { }
 
   public getAthlete(): void {
-    if (this.athleteId) { this.getActivityTotal(); }
+    if (this.athleteId) { this.getAthleteData(); }
     const url: string = 'https://www.strava.com/api/v3/athlete';
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(url, { headers });
     response.subscribe(data => {
       this.athleteId = data['id'];
-      this.getActivityTotal();
+      this.getAthleteData();
     });
   }
 
-  public getActivityTotal(): void {
-    if (this.activityTotal) { return; }
+  public getAthleteData(): void {
+    if (this.athleteData) { this.calculateActivityTotal(); }
     const url: string = `https://www.strava.com/api/v3/athletes/${this.athleteId}/stats`;
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(url, { headers });
     response.subscribe(data => {
-      this.calculateActivityTotal(data);
+      this.athleteData = data;
+      this.calculateActivityTotal();
     });
   }
 
@@ -87,9 +89,9 @@ export class ActivityService {
     return response;
   }
 
-  public calculateActivityTotal(data): void {
-    this.activityTotal = data['all_ride_totals']['count'] + data['all_run_totals']['count'] +
-    data['all_swim_totals']['count'];
+  public calculateActivityTotal(): void {
+    this.activityTotal = this.athleteData['all_ride_totals']['count'] +
+      this.athleteData['all_run_totals']['count'] + this.athleteData['all_swim_totals']['count'];
   }
 
 }

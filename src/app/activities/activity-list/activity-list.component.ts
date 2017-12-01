@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { DatePipe } from '@angular/common';
@@ -7,6 +7,9 @@ import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/merge';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/debounceTime';
 
 interface ActivityData {
   start_date: string;
@@ -22,6 +25,7 @@ interface ActivityData {
 export class ActivityListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('filter') filter: ElementRef;
 
   public selectedId: number;
   public displayedColumns = ['start_date', 'distance', 'average_pace', 'type'];
@@ -43,6 +47,16 @@ export class ActivityListComponent implements OnInit {
     this.activityService.getActivities();
     this.dataSource = new ActivityDataSource(this.activityService,
       this.paginator, this.sort);
+
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.dataSource) { return; }
+        if (this.filter.nativeElement.value === '') { this.activityService.getAthleteData(); }
+        this.dataSource.filter = this.filter.nativeElement.value;
+        this.activityService.activityTotal = this.dataSource.filteredData.length;
+      });
   }
 
   public highlightRow(row): void {
@@ -52,6 +66,11 @@ export class ActivityListComponent implements OnInit {
 }
 
 export class ActivityDataSource extends DataSource<any> {
+  filterChange: BehaviorSubject<string> = new BehaviorSubject('');
+  get filter(): string { return this.filterChange.value; }
+  set filter(filter: string) { this.filterChange.next(filter); }
+
+  public filteredData: any[] = [];
   public renderedData: any[] = [];
 
   constructor(
@@ -60,6 +79,7 @@ export class ActivityDataSource extends DataSource<any> {
     private sort: MatSort
   ) {
     super();
+    this.filterChange.subscribe(() => this.paginator.pageIndex = 0);
   }
 
   connect(): Observable<any[]> {
@@ -67,12 +87,16 @@ export class ActivityDataSource extends DataSource<any> {
     const displayDataChanges = [
     this.activityService.dataChange,
     this.sort.sortChange,
+    this.filterChange,
     this.paginator.page,
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      const sortedData = this.sortData(this.activityService.data.slice());
-      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+      this.filteredData = this.activityService.data.slice().filter((item: any) => {
+        const searchString = (item.type).toLowerCase();
+        return searchString.indexOf(this.filter.toLowerCase()) !== -1;
+      });
+      const sortedData = this.sortData(this.filteredData.slice());
       this.renderedData = sortedData.splice(0, this.paginator.pageSize);
       return this.renderedData;
     });
