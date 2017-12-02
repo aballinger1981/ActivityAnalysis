@@ -1,0 +1,18 @@
+<mat-sidenav-container class="nav-container">
+  <mat-sidenav #sidenav class="sidenav">
+    Jolly good!
+  </mat-sidenav>
+
+  <!-- <div class="sidenav-content"> -->
+    <mat-sidenav-content class="user">
+      <div *ngIf="activityService.athlete">
+        <div>
+          <img [src]="activityService.athlete['profile']">
+        </div>
+        <span class="text">{{activityService.athlete['firstname']}} {{activityService.athlete['lastname']}}</span>
+        <span class="text">{{activityService.athlete['email']}}</span>
+      </div>
+    </mat-sidenav-content>
+  <!-- </div> -->
+
+</mat-sidenav-container>

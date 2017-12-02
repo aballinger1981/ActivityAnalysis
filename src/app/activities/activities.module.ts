@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivityRoutingModule } from './activities-routing.module';
 import { MaterialModule } from '../material.module';
+import { SideNavComponent } from './side-nav/side-nav.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { ActivityListComponent } from './activity-list/activity-list.component';
@@ -13,11 +14,12 @@ import { ActivityInterceptor } from './activity.interceptor';
   imports: [
     CommonModule,
     ActivityRoutingModule,
-    MaterialModule
+    MaterialModule,
   ],
   declarations: [
     ActivityListComponent,
-    ActivityDetailComponent
+    ActivityDetailComponent,
+    SideNavComponent
   ],
   providers: [ActivityService, {
     provide: HTTP_INTERCEPTORS,

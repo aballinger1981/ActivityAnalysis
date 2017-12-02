@@ -10,7 +10,7 @@ import {
   MatPaginatorModule,
   MatInputModule,
   MatSortModule,
-  MatSidenavModule
+  MatSidenavModule,
 } from '@angular/material';
 
 @NgModule({

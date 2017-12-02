@@ -19,6 +19,7 @@ export class Activity {
 @Injectable()
 export class ActivityService {
   private activitiesUrl: string = 'https://www.strava.com/api/v3/activities';
+  public athlete: Object;
   public athleteId: number;
   public athleteData: Object;
   public activityTotal: number;
@@ -33,19 +34,21 @@ export class ActivityService {
   ) { }
 
   public getAthlete(): void {
-    if (this.athleteId) { this.getAthleteData(); }
+    console.log(this.athlete);
+    if (this.athleteId) { this.getAthleteData(); return; }
     const url: string = 'https://www.strava.com/api/v3/athlete';
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(url, { headers });
     response.subscribe(data => {
       this.athleteId = data['id'];
+      this.athlete = data;
       this.getAthleteData();
     });
   }
 
   public getAthleteData(): void {
-    if (this.athleteData) { this.calculateActivityTotal(); }
+    if (this.athleteData) { this.calculateActivityTotal(); return; }
     const url: string = `https://www.strava.com/api/v3/athletes/${this.athleteId}/stats`;
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
