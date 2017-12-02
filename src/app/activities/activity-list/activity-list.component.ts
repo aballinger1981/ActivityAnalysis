@@ -30,7 +30,7 @@ export class ActivityListComponent implements OnInit {
   public selectedId: number;
   public displayedColumns = ['start_date', 'distance', 'average_pace', 'type'];
   public dataSource: ActivityDataSource | null;
-  public selectedRowIndex: number;
+  public selectedRowIndex: number | null;
 
   constructor(
     private activityService: ActivityService,
@@ -60,6 +60,10 @@ export class ActivityListComponent implements OnInit {
   }
 
   public highlightRow(row): void {
+    if (this.selectedRowIndex === row.id) {
+      this.selectedRowIndex = null;
+      return;
+    }
     this.selectedRowIndex = row.id;
   }
 

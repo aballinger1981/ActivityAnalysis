@@ -3,11 +3,6 @@
   justify-content: center;
 }
 
-li.selected {
-  background-color: #ACCBD8;
-  color: #320DB9;
-}
-
 .activities-container {
   display: flex;
   flex-direction: column;
@@ -19,12 +14,25 @@ li.selected {
   max-height: 1000px;
 }
 
-mat-row:nth-child(even) {
+mat-header-row {
+  background-color: #2B2E95;
+}
+
+mat-header-cell {
+  color: white;
+  font-size: 14px;
+}
+
+mat-row:nth-child(even), .unhighlight {
   background-color: #ffffff;
 }
 
-mat-row:nth-child(odd),  {
+mat-row:nth-child(odd), .unhighlight {
   background-color: #f2f2f2;
+}
+
+mat-cell {
+  color: #2B2E95;
 }
 
 a {
@@ -32,5 +40,8 @@ a {
 }
 
 .highlight {
-  background-color: #42A948;
+  background-color: rgb(183, 185, 241) !important;
+  mat-cell {
+    color: white;
+  }
 }
