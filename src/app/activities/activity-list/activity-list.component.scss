@@ -5,12 +5,14 @@ app-side-nav {
 .wrapper {
   display: flex;
   justify-content: center;
+  margin-left: 300px;
 }
 
 .activities-container {
   display: flex;
   flex-direction: column;
-  min-width: 1000px;
+  min-width: 900px;
+  margin-top: 50px;
 }
 
 .mat-table {

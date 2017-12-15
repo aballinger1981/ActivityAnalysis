@@ -6,7 +6,7 @@ import { Activity, ActivityService } from '../activity.service';
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { SideNavComponent } from '../../side-nav/side-nav.component';
+import { SideNavComponent } from '../side-nav/side-nav.component';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/distinctUntilChanged';
