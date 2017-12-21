@@ -1,22 +1,21 @@
 app-side-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
   height: 100%;
 }
 
 .wrapper {
   display: flex;
-  justify-content: center;
-  margin-left: 300px;
-  max-height: 600px;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .activities-container {
   display: flex;
   flex-direction: column;
+  max-height: 600px;  
   min-width: 900px;
   margin-top: 50px;
+  margin-left: 20px;
+  margin-right: 50px;
 }
 
 .mat-table {
@@ -49,7 +48,7 @@ a {
 }
 
 .highlight {
-  background-color: rgb(183, 185, 241) !important;
+  background-color: #b0c1f0 !important;
   mat-cell {
     color: white;
   }

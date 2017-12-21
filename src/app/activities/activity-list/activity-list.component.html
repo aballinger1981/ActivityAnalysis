@@ -11,12 +11,13 @@
   </a>
   </li>
 </ul> -->
+<div class="wrapper">
 <app-side-nav></app-side-nav>
 
-<div class="wrapper">
+
   <div class="activities-container mat-elevation-z8">
       <mat-form-field floatPlaceholder="never">
-          <input matInput #filter placeholder="Filter activities">
+          <input matInput #filter placeholder="Filter activities" class="filter">
       </mat-form-field>
     <mat-table #table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="start_date">
