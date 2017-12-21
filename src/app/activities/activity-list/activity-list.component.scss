@@ -8,14 +8,15 @@ app-side-nav {
   height: 100%;
 }
 
-.activities-container {
+.table-container {
+  position: absolute;
   display: flex;
   flex-direction: column;
   max-height: 600px;  
   min-width: 900px;
   margin-top: 50px;
-  margin-left: 20px;
-  margin-right: 50px;
+  margin-left: 350px;
+  margin-right: 75px;
 }
 
 .mat-table {
@@ -45,6 +46,10 @@ mat-cell {
 
 a {
   text-decoration: none;
+}
+
+a, a:visited, a:hover, a:active {
+  color: #2B2E95;
 }
 
 .highlight {
