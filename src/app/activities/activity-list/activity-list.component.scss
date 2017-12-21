@@ -1,11 +1,15 @@
 app-side-nav {
   position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
 }
 
 .wrapper {
   display: flex;
   justify-content: center;
   margin-left: 300px;
+  max-height: 600px;
 }
 
 .activities-container {
@@ -17,7 +21,6 @@ app-side-nav {
 
 .mat-table {
   overflow: auto;
-  max-height: 1000px;
 }
 
 mat-header-row {

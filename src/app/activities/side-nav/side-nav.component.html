@@ -11,8 +11,14 @@
         </div>
         <div class="text">
           <span class="name">{{activityService.athlete['firstname']}} {{activityService.athlete['lastname']}}</span>
-          <span class="email">{{activityService.athlete['city']}}</span>
+          <span class="location">{{activityService.athlete['city']}}</span>
         </div>
+      </div>
+    </mat-sidenav-content>
+
+    <mat-sidenav-content class="achievements">
+      <div *ngIf="activityService.athlete">
+        
       </div>
     </mat-sidenav-content>
   <!-- </div> -->
