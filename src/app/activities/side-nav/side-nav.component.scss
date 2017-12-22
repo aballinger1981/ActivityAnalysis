@@ -39,8 +39,34 @@
 }
 
 .achievements {
-  height: 75px;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
   background-color: #4d51cb;
   border-top: 1px solid grey;
   border-bottom: 1px solid grey;
+}
+
+.activity-icon-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.activity-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.activity-icon img {
+  height: 50px;
+  width: 50px;
+}
+
+.activity-icon span {
+  color: white;
 }
