@@ -45,7 +45,8 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"
         [ngClass]="{'highlight': selectedRowIndex === row.id, 'unhighlight': selectedRowIndex === null}"
-        (mouseenter)="highlightRow(row)">
+        (mouseenter)="highlightRow(row)"
+        (mouseleave)="selectedRowIndex = null">
       </mat-row>
     </mat-table>
 
