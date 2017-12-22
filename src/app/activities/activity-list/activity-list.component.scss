@@ -12,7 +12,9 @@ app-side-nav {
   position: absolute;
   display: flex;
   flex-direction: column;
-  max-height: 600px;  
+  height: 90vh;
+  width: 70vw;
+  max-width: 1200px;
   min-width: 900px;
   margin-top: 50px;
   margin-left: 350px;
