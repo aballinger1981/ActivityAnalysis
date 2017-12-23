@@ -24,7 +24,7 @@ export class ActivityInterceptor implements HttpInterceptor {
         console.log(event);
         const activity = event.body;
         activity['average_pace'] = this.calculateAveragePace(activity['moving_time'], activity['distance']);
-        activity['distance'] = this.calculateMiles(activity);
+        activity['distance_miles'] = this.calculateMiles(activity);
         activity['splits_standard'].map(split => {
           return split['pace'] = this.calculateAveragePace(split['moving_time'], split['distance']);
         });
@@ -43,7 +43,8 @@ export class ActivityInterceptor implements HttpInterceptor {
     if (Number.parseInt(seconds, 10) < 10) {
       seconds = '0' + seconds;
     } else if (seconds.length === 1) { seconds = '' + seconds + '0'; }
-    averagePace = `${averagePace.substring(0, 1)}:${seconds}`;
+    const decimal: number = averagePace.indexOf('.');
+    averagePace = `${averagePace.substring(0, decimal)}:${seconds}`;
     return averagePace;
   }
 

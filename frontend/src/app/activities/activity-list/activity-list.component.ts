@@ -29,7 +29,7 @@ export class ActivityListComponent implements OnInit {
   @ViewChild('filter') filter: ElementRef;
 
   public selectedId: number;
-  public displayedColumns = ['start_date', 'distance', 'average_pace', 'type'];
+  public displayedColumns = ['start_date', 'distance_miles', 'average_pace', 'type'];
   public dataSource: ActivityDataSource | null;
   public selectedRowIndex: number | null;
 
