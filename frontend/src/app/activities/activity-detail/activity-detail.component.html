@@ -1,8 +1,8 @@
 <div class="wrapper">
   <app-side-nav></app-side-nav>
   <div *ngIf="activity$ | async as activity" class="activity">
-    <h3>{{activity.distance_miles}} mile {{activity.type}} on {{activity.start_date | date: 'M/d/yy'}}
-      at {{activity.start_date | date: 'h:mm a'}}
+    <h3>{{activity.distance_miles}} mile {{activity.type.toLowerCase()}} on {{activity.start_date | date: 'M/d/yy'}}
+      at {{activity.start_date | date: 'h:mma' | lowercase}}
     </h3>
     <div>
       <label>Id: </label>{{activity.id}}
