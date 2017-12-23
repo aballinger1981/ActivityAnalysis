@@ -1,26 +1,28 @@
-<h2>ACTIVITIES</h2>
-<div *ngIf="activity$ | async as activity">
-  <h3>{{activity.name}} on {{activity.start_date | date: 'M/d/yy'}}
-    at {{activity.start_date | date: 'h:mm a'}}
-  </h3>
-  <div>
-    <label>Id: </label>{{activity.id}}
+<div class="wrapper">
+  <app-side-nav></app-side-nav>
+  <div *ngIf="activity$ | async as activity" class="activity">
+    <h3>{{activity.distance_miles}} mile {{activity.type}} on {{activity.start_date | date: 'M/d/yy'}}
+      at {{activity.start_date | date: 'h:mm a'}}
+    </h3>
+    <div>
+      <label>Id: </label>{{activity.id}}
+    </div>
+    <div>
+      <label>Distance: </label>{{activity.distance_miles}}mi
+    </div>
+    <div>
+      <label>Average Pace: </label>{{activity.average_pace}}
+    </div>
+    <div>
+      <label>Splits: </label>
+      <ul>
+        <li *ngFor="let split of activity.splits_standard">
+          <em>Split {{split.split}}:</em> {{split.pace}}/mi
+        </li>
+      </ul>
+    </div>
+    <p>
+      <button (click)="this.goToActivities(activity)">Back</button>
+    </p>
   </div>
-  <div>
-    <label>Distance: </label>{{activity.distance_miles}}mi
-  </div>
-  <div>
-    <label>Average Pace: </label>{{activity.average_pace}}
-  </div>
-  <div>
-    <label>Splits: </label>
-    <ul>
-      <li *ngFor="let split of activity.splits_standard">
-        <em>Split {{split.split}}:</em> {{split.pace}}/mi
-      </li>
-    </ul>
-  </div>
-  <p>
-    <button (click)="this.goToActivities(activity)">Back</button>
-  </p>
 </div>
