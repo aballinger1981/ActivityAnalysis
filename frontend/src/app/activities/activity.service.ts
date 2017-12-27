@@ -22,6 +22,7 @@ export class ActivityService {
   public athlete: Object;
   public athleteId: number;
   public athleteData: Object;
+  public activity: Object;
   public activityTotal: number;
   public pageEvent: PageEvent;
   public pageIndex: number;
@@ -89,6 +90,9 @@ export class ActivityService {
     const headers: HttpHeaders = new HttpHeaders()
     .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     const response = this.http.get(url, { headers });
+    response.subscribe(activity => {
+      this.activity = activity;
+    });
     return response;
   }
 

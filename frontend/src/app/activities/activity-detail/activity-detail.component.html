@@ -1,17 +1,47 @@
 <div class="wrapper">
   <app-side-nav></app-side-nav>
   <div *ngIf="activity$ | async as activity" class="activity">
+    <mat-grid-list cols="4" rowHeight="2:1">
+      <mat-grid-tile>{{activity.distance_miles}}mi</mat-grid-tile>
+      <mat-grid-tile>{{activity.average_pace}}</mat-grid-tile>
+      <mat-grid-tile>3</mat-grid-tile>
+      <mat-grid-tile>{{activity.calories}}</mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="2" rowHeight="1:1">
+      <mat-grid-tile>
+          <div class="example-container mat-elevation-z8">
+              <mat-table #table [dataSource]="dataSource">
+                <ng-container matColumnDef="distance_miles">
+                  <mat-header-cell *matHeaderCellDef> Distance </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.distance_miles}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="pace">
+                  <mat-header-cell *matHeaderCellDef> Pace </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.pace}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="elevation_difference">
+                  <mat-header-cell *matHeaderCellDef> Elevation </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.elevation_difference}} </mat-cell>
+                </ng-container>
+            
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+            </div>
+      </mat-grid-tile>
+      <mat-grid-tile>2</mat-grid-tile>
+    </mat-grid-list>
     <h3>{{activity.distance_miles}} mile {{activity.type.toLowerCase()}} on {{activity.start_date | date: 'M/d/yy'}}
       at {{activity.start_date | date: 'h:mma' | lowercase}}
     </h3>
-    <div>
-      <label>Id: </label>{{activity.id}}
-    </div>
     <div>
       <label>Distance: </label>{{activity.distance_miles}}mi
     </div>
     <div>
       <label>Average Pace: </label>{{activity.average_pace}}
+    </div>
+    <div>
+      <label>Calories: </label>{{activity.calories}}
     </div>
     <div>
       <label>Splits: </label>

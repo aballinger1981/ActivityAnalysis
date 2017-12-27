@@ -54,7 +54,9 @@ export class ActivityListComponent implements OnInit {
       .distinctUntilChanged()
       .subscribe(() => {
         if (!this.dataSource) { return; }
-        if (this.filter.nativeElement.value === '') { this.activityService.getAthleteData(); }
+        if (this.filter.nativeElement.value === '') {
+          this.activityService.getAthleteData();
+        }
         this.dataSource.filter = this.filter.nativeElement.value;
         this.activityService.activityTotal = this.dataSource.filteredData.length;
       });
