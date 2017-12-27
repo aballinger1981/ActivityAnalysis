@@ -4,12 +4,10 @@ app-side-nav {
 
 .wrapper {
   display: flex;
-  justify-content: space-between;
   height: 100vh;
 }
 
 .table-container {
-  position: absolute;
   display: flex;
   flex-direction: column;
   width: 70vw;
@@ -17,8 +15,8 @@ app-side-nav {
   max-width: 1200px;
   min-width: 900px;
   margin-top: 50px;
-  margin-left: 350px;
-  margin-right: 75px;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 mat-form-field {
