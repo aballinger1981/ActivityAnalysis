@@ -73,7 +73,7 @@ export class ActivityListComponent implements OnInit {
 }
 
 export class ActivityDataSource extends DataSource<any> {
-  filterChange: BehaviorSubject<string> = new BehaviorSubject('');
+  public filterChange: BehaviorSubject<string> = new BehaviorSubject('');
   get filter(): string { return this.filterChange.value; }
   set filter(filter: string) { this.filterChange.next(filter); }
 

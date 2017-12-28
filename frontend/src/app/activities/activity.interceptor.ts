@@ -26,7 +26,9 @@ export class ActivityInterceptor implements HttpInterceptor {
         activity['average_pace'] = this.calculateAveragePace(activity['moving_time'], activity['distance']);
         activity['distance_miles'] = this.calculateMiles(activity);
         activity['splits_standard'].map(split => {
-          return split['pace'] = this.calculateAveragePace(split['moving_time'], split['distance']);
+          split['pace'] = this.calculateAveragePace(split['moving_time'], split['distance']);
+          split['distance_miles'] = this.calculateMiles(split);
+          return split;
         });
         const duplicate = event.clone({
           body: activity
