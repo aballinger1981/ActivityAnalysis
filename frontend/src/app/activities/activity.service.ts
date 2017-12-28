@@ -78,10 +78,11 @@ export class ActivityService {
     const url: string = 'https://www.strava.com/api/v3/athlete/activities';
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    return this.http.get(`${url}?page=${index}&per_page=${this.pageSize}`, { headers })
-    .do(activities => {
+    const response = this.http.get(`${url}?page=${index}&per_page=${this.pageSize}`, { headers });
+    response.subscribe((activities) => {
       this.activitiesChange.next(activities);
     });
+    return response;
   }
 
   public getActivity(id: number | string) {
