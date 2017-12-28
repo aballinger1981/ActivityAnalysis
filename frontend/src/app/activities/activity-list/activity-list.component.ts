@@ -92,7 +92,7 @@ export class ActivityDataSource extends DataSource<any> {
   connect(): Observable<any[]> {
     // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
-    this.activityService.dataChange,
+    this.activityService.activitiesChange,
     this.sort.sortChange,
     this.filterChange,
     this.paginator.page,

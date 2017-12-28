@@ -19,7 +19,6 @@ export class ActivityDetailComponent implements OnInit {
   public pageSize: number;
   public displayedColumns = ['distance_miles', 'pace', 'elevation_difference'];
   public dataSource: ActivityDataSource | null;
-  public dataChange: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor(
     private route: ActivatedRoute,
@@ -32,12 +31,10 @@ export class ActivityDetailComponent implements OnInit {
       .switchMap((params: ParamMap) => {
         this.pageIndex = +params.get('page');
         this.pageSize = +params.get('per_page');
-        const response = this.activityService.getActivity(params.get('id'));
-        response.subscribe(activity => this.dataChange.next(activity['splits_standard']));
-        return response;
+        return this.activityService.getActivity(params.get('id'));
       });
     this.setNavData();
-    this.dataSource = new ActivityDataSource(this.dataChange);
+    this.dataSource = new ActivityDataSource(this.activityService);
   }
 
   public setNavData(): void {
@@ -62,13 +59,13 @@ export class ActivityDetailComponent implements OnInit {
 export class ActivityDataSource extends DataSource<any> {
 
   constructor(
-    private dataChange: BehaviorSubject<any[]>
+    private activityService: ActivityService
   ) {
     super();
   }
 
   connect(): Observable<any> {
-    return this.dataChange;
+    return this.activityService.activityChange;
   }
 
   disconnect() {

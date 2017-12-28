@@ -22,13 +22,13 @@ export class ActivityService {
   public athlete: Object;
   public athleteId: number;
   public athleteData: Object;
-  public activity: Object;
   public activityTotal: number;
   public pageEvent: PageEvent;
   public pageIndex: number;
   public pageSize: number;
-  public dataChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-  get data(): any[] { return this.dataChange.value; }
+  public activitiesChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  public activityChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+  get data(): any[] { return this.activitiesChange.value; }
 
   constructor(
     private http: HttpClient
@@ -78,22 +78,20 @@ export class ActivityService {
     const url: string = 'https://www.strava.com/api/v3/athlete/activities';
     const headers: HttpHeaders = new HttpHeaders()
       .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    const response = this.http.get(`${url}?page=${index}&per_page=${this.pageSize}`, { headers });
-    response.subscribe((activities) => {
-      this.dataChange.next(activities);
+    return this.http.get(`${url}?page=${index}&per_page=${this.pageSize}`, { headers })
+    .do(activities => {
+      this.activitiesChange.next(activities);
     });
-    return response;
   }
 
   public getActivity(id: number | string) {
     const url: string = `https://www.strava.com/api/v3/activities/${id}`;
     const headers: HttpHeaders = new HttpHeaders()
     .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    const response = this.http.get(url, { headers });
-    response.subscribe(activity => {
-      this.activity = activity;
+    return this.http.get(url, { headers })
+    .do(activity => {
+      this.activityChange.next(activity['splits_standard']);
     });
-    return response;
   }
 
   public calculateActivityTotal(): void {
