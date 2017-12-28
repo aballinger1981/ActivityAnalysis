@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
 import { Activity, ActivityService } from '../activity.service';
 import { DataSource } from '@angular/cdk/collections';
+import * as polyline from 'polyline';
 
 @Component({
   selector: 'app-activity-detail',
@@ -19,11 +20,14 @@ export class ActivityDetailComponent implements OnInit {
   public pageSize: number;
   public displayedColumns = ['distance_miles', 'pace', 'elevation_difference'];
   public dataSource: ActivityDataSource | null;
+  public coordinates: Array<number[]>;
+  public startLatLong: number[];
+  public endLatLong: number[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private activityService: ActivityService
+    private activityService: ActivityService,
   ) { }
 
   ngOnInit() {
@@ -34,6 +38,7 @@ export class ActivityDetailComponent implements OnInit {
         return this.activityService.getActivity(params.get('id'));
       });
     this.setNavData();
+    this.activityService.activityChange.subscribe(() => this.getTableAndMapData());
     this.dataSource = new ActivityDataSource(this.activityService);
   }
 
@@ -45,6 +50,14 @@ export class ActivityDetailComponent implements OnInit {
         this.activityService.getAthleteData();
       }
     }
+  }
+
+  public getTableAndMapData(): void {
+    const activity = this.activityService.activityChange.value;
+    // this.coordinates = polyline.decode(activity['map']['polyline']);
+    this.startLatLong = activity['start_latlng'];
+    this.endLatLong = activity['end_latlng'];
+    console.log(activity['map']['polyline']);
   }
 
   public goToActivities(activity: Activity): void {
@@ -65,7 +78,9 @@ export class ActivityDataSource extends DataSource<any> {
   }
 
   connect(): Observable<any> {
-    return this.activityService.activityChange;
+    return this.activityService.activityChange.map((activity) => {
+      return activity['splits_standard'];
+    });
   }
 
   disconnect() {

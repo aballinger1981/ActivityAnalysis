@@ -32,7 +32,15 @@
           </mat-table>
       </div>
       <div class="map">
-        <agm-map></agm-map>
+        <agm-map [zoom]=8 [latitude]="startLatLong[0]" [longitude]="endLatLong[1]">
+          <agm-polyline [visible]="true" [strokeWeight]="3" *ngIf="coordinates">
+            <agm-polyline-point
+            *ngFor="let coordinate of coordinates; let i=index"
+            [latitude]="coordinate[0]"
+            [longitude]="coordinate[1]">
+            </agm-polyline-point>
+          </agm-polyline>
+        </agm-map>
       </div>
     </div>
    

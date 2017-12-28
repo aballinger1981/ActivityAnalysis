@@ -99,7 +99,7 @@ export class ActivityDataSource extends DataSource<any> {
     ];
 
     return Observable.merge(...displayDataChanges).map(() => {
-      this.filteredData = this.activityService.data.slice().filter((item: any) => {
+      this.filteredData = this.activityService.activitiesData.slice().filter((item: any) => {
         const searchString = (item.type).toLowerCase();
         return searchString.indexOf(this.filter.toLowerCase().trim()) !== -1;
       });

@@ -28,7 +28,8 @@ export class ActivityService {
   public pageSize: number;
   public activitiesChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   public activityChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-  get data(): any[] { return this.activitiesChange.value; }
+  get activitiesData(): any[] { return this.activitiesChange.value; }
+  get activityData(): any[] { return this.activityChange.value; }
 
   constructor(
     private http: HttpClient
@@ -90,8 +91,8 @@ export class ActivityService {
     const headers: HttpHeaders = new HttpHeaders()
     .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
     return this.http.get(url, { headers })
-    .do(activity => {
-      this.activityChange.next(activity['splits_standard']);
+      .do(activity => {
+        this.activityChange.next(activity);
     });
   }
 
