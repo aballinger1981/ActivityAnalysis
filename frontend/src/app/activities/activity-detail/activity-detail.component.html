@@ -10,30 +10,32 @@
       <mat-grid-tile>Moving Time: {{activity.moving_time}}</mat-grid-tile>
       <mat-grid-tile>Calories: {{activity.calories}}</mat-grid-tile>
     </mat-grid-list>
-    <mat-grid-list cols="2" rowHeight="1:1" class="splits">
-      <mat-grid-tile>
-          <div class="table-container mat-elevation-z8">
-              <mat-table #table [dataSource]="dataSource">
-                <ng-container matColumnDef="distance_miles">
-                  <mat-header-cell *matHeaderCellDef> Distance </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.distance_miles}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="pace">
-                  <mat-header-cell *matHeaderCellDef> Pace </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.pace}} </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="elevation_difference">
-                  <mat-header-cell *matHeaderCellDef> Elevation </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.elevation_difference}} </mat-cell>
-                </ng-container>
+    
+    <div class="table-map-wrapper">
+      <div class="table-container mat-elevation-z8">
+          <mat-table #table [dataSource]="dataSource">
+            <ng-container matColumnDef="distance_miles">
+              <mat-header-cell *matHeaderCellDef> Distance </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.distance_miles}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="pace">
+              <mat-header-cell *matHeaderCellDef> Pace </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.pace}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="elevation_difference">
+              <mat-header-cell *matHeaderCellDef> Elevation </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.elevation_difference}} </mat-cell>
+            </ng-container>
 
-                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-              </mat-table>
-            </div>
-      </mat-grid-tile>
-      <mat-grid-tile>2</mat-grid-tile>
-    </mat-grid-list>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+      </div>
+      <div class="map">
+        <agm-map></agm-map>
+      </div>
+    </div>
+   
       <button (click)="this.goToActivities(activity)">Back</button>
   </div>
 </div>
