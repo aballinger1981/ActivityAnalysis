@@ -29,7 +29,9 @@ export class ActivityService {
   public activitiesChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   public activityChange: BehaviorSubject<any> = new BehaviorSubject<any>([]);
   get activitiesData(): any[] { return this.activitiesChange.value; }
-  get activityData(): any[] { return this.activityChange.value; }
+
+  public headers: HttpHeaders = new HttpHeaders()
+    .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
 
   constructor(
     private http: HttpClient
@@ -39,9 +41,7 @@ export class ActivityService {
     console.log(this.athlete);
     if (this.athleteId) { this.getAthleteData(); return; }
     const url: string = 'https://www.strava.com/api/v3/athlete';
-    const headers: HttpHeaders = new HttpHeaders()
-      .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    const response = this.http.get(url, { headers });
+    const response: Observable<any> = this.http.get(url, { headers: this.headers });
     response.subscribe(data => {
       this.athleteId = data['id'];
       this.athlete = data;
@@ -52,9 +52,7 @@ export class ActivityService {
   public getAthleteData(): void {
     if (this.athleteData) { this.calculateActivityTotal(); return; }
     const url: string = `https://www.strava.com/api/v3/athletes/${this.athleteId}/stats`;
-    const headers: HttpHeaders = new HttpHeaders()
-      .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    const response = this.http.get(url, { headers });
+    const response: Observable<any> = this.http.get(url, { headers: this.headers });
     response.subscribe(data => {
       this.athleteData = data;
       this.calculateActivityTotal();
@@ -77,9 +75,7 @@ export class ActivityService {
       this.pageSize = event.pageSize;
     }
     const url: string = 'https://www.strava.com/api/v3/athlete/activities';
-    const headers: HttpHeaders = new HttpHeaders()
-      .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    const response = this.http.get(`${url}?page=${index}&per_page=${this.pageSize}`, { headers });
+    const response: Observable<any> = this.http.get(`${url}?page=${index}&per_page=${this.pageSize}`, { headers: this.headers });
     response.subscribe((activities) => {
       this.activitiesChange.next(activities);
     });
@@ -88,9 +84,7 @@ export class ActivityService {
 
   public getActivity(id: number | string) {
     const url: string = `https://www.strava.com/api/v3/activities/${id}`;
-    const headers: HttpHeaders = new HttpHeaders()
-    .set('Authorization', 'Bearer ' + localStorage.getItem('accessToken'));
-    return this.http.get(url, { headers })
+    return this.http.get(url, { headers: this.headers })
       .do(activity => {
         this.activityChange.next(activity);
     });
