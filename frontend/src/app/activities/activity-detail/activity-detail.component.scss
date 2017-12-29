@@ -11,10 +11,15 @@
   flex-direction: column;
 }
 
+.sidebar-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
 .activity {
   display: flex;
   flex-direction: column;
-  flex: 1;
   min-width: 1000px;
   max-width: 1200px;
   margin-left: 75px;
@@ -27,7 +32,6 @@ h3 {
 
 mat-toolbar {
   background-color: #3F51B5;
-  border-left: 2px solid #7986CB;
   color: white;
 }
 
@@ -48,10 +52,6 @@ mat-toolbar {
   width: 40px;
   fill: #E91E63;
 }
-
-// .table-map-section {
-//   background-color: #E8EAF6;
-// }
 
 .table-map-wrapper {
   display: flex;
