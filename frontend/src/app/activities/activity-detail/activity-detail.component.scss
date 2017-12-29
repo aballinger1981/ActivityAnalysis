@@ -6,24 +6,56 @@
   flex-direction: row;
 }
 
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .activity {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-width: 1000px;
   max-width: 1200px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 75px;
+  margin-right: 75px;
 }
 
 h3 {
   text-align: center;
 }
 
+mat-toolbar {
+  background-color: #3F51B5;
+  border-left: 2px solid #7986CB;
+  color: white;
+}
+
+.toolbar-wrapper > ::ng-deep .toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 16px;
+}
+
+.distance {
+  display: flex;
+  align-content: center;
+}
+
+.activity-type {
+  height: 40px;
+  width: 40px;
+  fill: #E91E63;
+}
+
+// .table-map-section {
+//   background-color: #E8EAF6;
+// }
+
 .table-map-wrapper {
   display: flex;
   flex-direction: row;
-  padding-bottom: 50px;
 }
 
 .table-container {
@@ -40,6 +72,14 @@ mat-table {
   overflow: auto;
 }
 
+mat-header-row {
+  background-color: #3F51B5;
+}
+
+mat-header-cell {
+  color: white;
+}
+
 .map {
   margin-left: 15px;
   width: 70%;
@@ -50,6 +90,7 @@ agm-map {
 }
 
 .line-chart-wrapper {
+  padding-top: 50px;
   padding-bottom: 50px;
 }
 
