@@ -25,6 +25,7 @@ export class ActivityInterceptor implements HttpInterceptor {
         const activity = event.body;
         activity['average_pace'] = this.calculateAveragePace(activity['moving_time'], activity['distance']);
         activity['distance_miles'] = this.calculateMiles(activity);
+        activity['moving_time'] = this.calculateTotalTime(activity['moving_time']);
         activity['splits_standard'].map(split => {
           split['pace'] = this.calculateAveragePace(split['moving_time'], split['distance']);
           split['distance_miles'] = this.calculateMiles(split);
@@ -48,6 +49,26 @@ export class ActivityInterceptor implements HttpInterceptor {
     const decimal: number = averagePace.indexOf('.');
     averagePace = `${averagePace.substring(0, decimal)}:${seconds}`;
     return averagePace;
+  }
+
+  private calculateTotalTime(movingTime): void {
+    let minutes: number = (movingTime / 60).toFixed(2);
+    if (minutes > 59.99) {
+      const hours: number = (minutes / 60).toFixed(2);
+      minutes = (60 * hours.substring(hours.length - 3)).toFixed(2);
+      const hoursDecimal: number = hours.indexOf('.');
+    }
+    const minutesDecimal: number = minutes.indexOf('.');
+    const seconds: number = (60 * minutes.substring(minutes.length - 3)).toFixed(2);
+    const secondsDecimal: number = seconds.indexOf('.');
+    if (Number.parseInt(seconds, 10) < 10) {
+      seconds = '0' + seconds;
+    } else if (seconds.length === 1) { seconds = '' + seconds + '0'; }
+    if (hours) {
+      return `${hours.substring(0, hoursDecimal)}:${minutes.substring(0, minutesDecimal)}:${seconds.substring(0, secondsDecimal)}`;
+    } else {
+      return `${minutes.substring(0, minutesDecimal)}:${seconds.substring(0, secondsDecimal)}`;
+    }
   }
 
   private calculateMiles(activity): number {
