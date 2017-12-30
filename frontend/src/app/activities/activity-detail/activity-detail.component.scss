@@ -9,6 +9,7 @@
 .content-wrapper {
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .sidebar-content-wrapper {
@@ -24,6 +25,7 @@
   max-width: 1200px;
   margin-left: 75px;
   margin-right: 75px;
+  margin-top: 50px;
 }
 
 h3 {
@@ -31,20 +33,26 @@ h3 {
 }
 
 mat-toolbar {
-  background-color: #3F51B5;
+  background-color: #002984;
   color: white;
+  min-height: 56px;
+  max-height: 56px;
 }
 
 .toolbar-wrapper > ::ng-deep .toolbar {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   font-size: 16px;
+  width: 100%;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 
-.distance {
+.distance, .pace, .duration, .calories {
   display: flex;
-  align-content: center;
+  align-items: center;
 }
 
 .activity-type {
@@ -73,7 +81,7 @@ mat-table {
 }
 
 mat-header-row {
-  background-color: #3F51B5;
+  background-color: #757ce8;
 }
 
 mat-header-cell {
