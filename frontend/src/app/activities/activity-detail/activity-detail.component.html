@@ -47,50 +47,55 @@
       <app-side-nav></app-side-nav>
 
       <div class="activity">
-        <h3>{{activity.start_date | date: 'M/d/yy'}}
-            at {{activity.start_date | date: 'h:mma' | lowercase}}
-        </h3>
-
-      <div class="table-map-wrapper">
-        <div class="table-container mat-elevation-z8">
-            <mat-table #table [dataSource]="dataSource">
-              <ng-container matColumnDef="split">
-                <mat-header-cell *matHeaderCellDef> Split </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.split}} </mat-cell>
-              </ng-container>
-              <ng-container matColumnDef="distance_miles">
-                <mat-header-cell *matHeaderCellDef> Distance </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.distance_miles}}mi </mat-cell>
-              </ng-container>
-              <ng-container matColumnDef="pace">
-                <mat-header-cell *matHeaderCellDef> Pace </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.pace}} </mat-cell>
-              </ng-container>
-              <ng-container matColumnDef="elevation_difference">
-                <mat-header-cell *matHeaderCellDef> Elevation </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.elevation_difference}} </mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-            </mat-table>
+        <div class="header-wrapper">
+          <span class="day-type">{{activity.start_date | date: 'EEEE'}} {{activity.type}}
+          </span>
+          <span class="time">
+            {{activity.start_date | date: 'longDate'}} -
+            {{activity.start_date | date: 'h:mma' | lowercase}}
+          </span>
         </div>
-        <div class="map">
-          <agm-map [zoom]=15 [latitude]="startLatLong[0]" [longitude]="endLatLong[1]">
-            <agm-polyline
-            [visible]="true"
-            [strokeWeight]="3"
-            [strokeColor]="strokeColor"
-            *ngIf="coordinates">
-              <agm-polyline-point
-              *ngFor="let coordinate of coordinates; let i=index"
-              [latitude]="coordinate[0]"
-              [longitude]="coordinate[1]">
-              </agm-polyline-point>
-            </agm-polyline>
-          </agm-map>
+
+        <div class="table-map-wrapper">
+          <div class="table-container">
+              <mat-table #table [dataSource]="dataSource">
+                <ng-container matColumnDef="split">
+                  <mat-header-cell *matHeaderCellDef> Split </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.split}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="distance_miles">
+                  <mat-header-cell *matHeaderCellDef> Distance </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.distance_miles}}mi </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="pace">
+                  <mat-header-cell *matHeaderCellDef> Pace </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.pace}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="elevation_difference">
+                  <mat-header-cell *matHeaderCellDef> Elevation </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.elevation_difference}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+          </div>
+          <div class="map">
+            <agm-map [zoom]=15 [latitude]="startLatLong[0]" [longitude]="endLatLong[1]">
+              <agm-polyline
+              [visible]="true"
+              [strokeWeight]="3"
+              [strokeColor]="strokeColor"
+              *ngIf="coordinates">
+                <agm-polyline-point
+                *ngFor="let coordinate of coordinates; let i=index"
+                [latitude]="coordinate[0]"
+                [longitude]="coordinate[1]">
+                </agm-polyline-point>
+              </agm-polyline>
+            </agm-map>
+          </div>
         </div>
-      </div>
         <div *ngIf="chartIsLoaded" class="line-chart-wrapper">
           <canvas baseChart
                       [datasets]="lineChartData"
@@ -101,7 +106,7 @@
                       [chartType]="lineChartType">
             </canvas>
         </div>
-        <button mat-raised-button color="accent" (click)="this.goToActivities(activity)">Back</button>
+        <!-- <button (click)="this.goToActivities(activity)">Back</button> -->
       </div>
     </div>
   </div>

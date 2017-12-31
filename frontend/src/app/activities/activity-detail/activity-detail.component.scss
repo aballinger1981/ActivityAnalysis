@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
 
 .wrapper {
   display: flex;
@@ -27,13 +28,24 @@
   margin-right: 75px;
 }
 
-h3 {
-  text-align: center;
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.day-type {
   font-family: 'Roboto', sans-serif;
   color: #002984;
   font-size: 32px;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  font-weight: 700;
+}
+
+.time {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  color: black;
 }
 
 mat-toolbar {
@@ -42,7 +54,7 @@ mat-toolbar {
   color: white;
   min-height: 56px;
   max-height: 56px;
-  border-bottom: 1px solid #757ce8;
+  box-shadow: 0 3px 3px 0 rgba(0,0,0, .6);
 }
 
 .toolbar-wrapper > ::ng-deep .toolbar {
@@ -64,13 +76,14 @@ mat-toolbar {
 .activity-type {
   height: 40px;
   width: 40px;
-  fill: #E91E63;
+  fill: #7986CB;
   margin-right: 10px;
 }
 
 .table-map-wrapper {
   display: flex;
   flex-direction: row;
+  border: 1px solid #9FA8DA;
 }
 
 .table-container {
@@ -96,7 +109,6 @@ mat-cell {
 }
 
 .map {
-  margin-left: 15px;
   width: 70%;
 }
 
@@ -111,4 +123,8 @@ agm-map {
 
 canvas {
   height: 300px;
+}
+
+button {
+  background-color: #7986CB;
 }
