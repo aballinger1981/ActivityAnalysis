@@ -5,6 +5,41 @@
   flex-direction: row;
 }
 
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sidebar-content-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.toolbar-wrapper > ::ng-deep .toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 16px;
+  width: 100%;
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+.run, .bike, .swim {
+  display: flex;
+  align-items: center;
+}
+
+.activity-type {
+  height: 40px;
+  width: 40px;
+  fill: #7986CB;
+  margin-right: 10px;
+}
+
 .table-container {
   display: flex;
   flex-direction: column;
@@ -13,9 +48,15 @@
   max-height: 90vh;
   max-width: 1200px;
   min-width: 900px;
-  margin-top: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin: 75px;
+}
+
+mat-toolbar {
+  background-color: #002984;
+  min-height: 56px;
+  max-height: 56px;
+  box-shadow: 0 3px 3px 0 rgba(0,0,0, .6);
+  color: white;
 }
 
 mat-table {

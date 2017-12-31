@@ -54,6 +54,7 @@ export class ActivityService {
     const url: string = `https://www.strava.com/api/v3/athletes/${this.athleteId}/stats`;
     const response: Observable<any> = this.http.get(url, { headers: this.headers });
     response.subscribe(data => {
+      console.log(data);
       this.athleteData = data;
       this.calculateActivityTotal();
     });
