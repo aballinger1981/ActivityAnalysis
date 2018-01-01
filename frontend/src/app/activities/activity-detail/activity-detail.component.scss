@@ -83,7 +83,7 @@ mat-toolbar {
 .table-map-wrapper {
   display: flex;
   flex-direction: row;
-  border: 1px solid #9FA8DA;
+  border: 2px solid #9FA8DA;
 }
 
 .table-container {
@@ -119,10 +119,14 @@ agm-map {
 .line-chart-wrapper {
   padding-top: 50px;
   padding-bottom: 50px;
+  margin-bottom: 50px;
+  border-right: 2px solid #9FA8DA;
+  border-left: 2px solid #9FA8DA;
+  border-bottom: 2px solid #9FA8DA;
 }
 
 canvas {
-  height: 300px;
+  height: 250px;
 }
 
 button {
