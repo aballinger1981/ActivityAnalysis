@@ -11,6 +11,7 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityService } from './activity.service';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 import { ActivityInterceptor } from './activity.interceptor';
+import { ConversionService } from './conversion.service';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { ActivityInterceptor } from './activity.interceptor';
     ActivityDetailComponent,
     SideNavComponent
   ],
-  providers: [ActivityService, {
+  providers: [ActivityService, ConversionService, {
     provide: HTTP_INTERCEPTORS,
     useClass: ActivityInterceptor,
     multi: true,
