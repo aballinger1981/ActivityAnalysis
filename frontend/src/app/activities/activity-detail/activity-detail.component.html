@@ -80,7 +80,7 @@
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
               </mat-table>
           </div>
-          <div class="map">
+          <div *ngIf="startLatLong && endLatLong" class="map">
             <agm-map [zoom]=15 [latitude]="startLatLong[0]" [longitude]="endLatLong[1]">
               <agm-polyline
               [visible]="true"
