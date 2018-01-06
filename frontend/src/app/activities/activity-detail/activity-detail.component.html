@@ -95,6 +95,9 @@
               </agm-polyline>
             </agm-map>
           </div>
+          <div *ngIf="!startLatLong && !endLatLong" class="no-map">
+            <span>No Map Data</span>
+          </div>
         </div>
         <div *ngIf="chartIsLoaded" class="line-chart-wrapper">
           <canvas baseChart
