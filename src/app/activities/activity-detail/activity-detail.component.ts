@@ -81,13 +81,15 @@ export class ActivityDetailComponent implements OnInit {
 
   public getMapAndChartData(): void {
     const activity = this.activityService.activityChange.value;
-    this.coordinates = polyline.decode(String(activity['map']['polyline']));
-    this.startLatLong = activity['start_latlng'];
-    this.endLatLong = activity['end_latlng'];
-    activity['splits_standard'].forEach(split => {
-      this.data.push(split['moving_time']);
-      this.lineChartLabels.push(split['split']);
-    });
+    if (activity['start_latlng'] !== null || activity['end_latlng'] !== null) {
+      this.coordinates = polyline.decode(String(activity['map']['polyline']));
+      this.startLatLong = activity['start_latlng'];
+      this.endLatLong = activity['end_latlng'];
+      activity['splits_standard'].forEach(split => {
+        this.data.push(split['moving_time']);
+        this.lineChartLabels.push(split['split']);
+      });
+    }
     this.chartIsLoaded = true;
   }
 

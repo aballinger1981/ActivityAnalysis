@@ -49,6 +49,6 @@ export class ActivityInterceptor implements HttpInterceptor {
       split['distance_miles'] = this.conversionService.calculateMiles(split);
       return split;
     });
-    return activity
+    return activity;
   }
 }

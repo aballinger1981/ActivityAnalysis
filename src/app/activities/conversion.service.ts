@@ -8,8 +8,8 @@ export class ConversionService {
   public calculateAveragePace(movingTime, distance): string {
     movingTime = (movingTime / 60).toFixed(2);
     distance = +(distance / 1609.344).toFixed(2);
-    let minutes: string = (movingTime / distance).toFixed(2);
-    let seconds: string = String(Math.round(+(minutes.substring(minutes.length - 3)) * 60));
+    const minutes: string = (movingTime / distance).toFixed(2);
+    const seconds: string = String(Math.round(+(minutes.substring(minutes.length - 3)) * 60));
     return this.addZeros(minutes, seconds);
   }
 
@@ -18,8 +18,8 @@ export class ConversionService {
     if (+(minutes) > 59.99) {
       const hours: string = (+(minutes) / 60).toFixed(2);
       minutes = (60 * +(hours.substring(hours.length - 3))).toFixed(2);
-      const seconds: string = String(Math.floor(60 * +(minutes.substring(minutes.length - 3))));
-      return this.addZeros(minutes, seconds, hours);
+      const totalSeconds: string = String(Math.floor(60 * +(minutes.substring(minutes.length - 3))));
+      return this.addZeros(minutes, totalSeconds, hours);
     }
     const seconds: string = String(Math.floor(60 * +(minutes.substring(minutes.length - 3))));
     return this.addZeros(minutes, seconds);
